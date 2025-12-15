@@ -17,16 +17,74 @@
             win.print();
         };
     }
+
+    function downloadDoc() {
+        const link = document.createElement('a');
+        link.href = './Saeid_Mostafaei_CV_EN.pdf';
+        link.setAttribute('download', 'Saeid_Mostafaei_CV_EN.pdf');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+
+    function forceDownload() {
+    fetch('Saeid_Mostafaei_CV_EN.pdf')
+        .then(response => response.blob())
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Saeid_Mostafaei_CV_EN.pdf';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        });
+}
 </script>
 
 <body>
 
-    <div class="print-btn-circle" onclick="openPrintView()">
+    <!-- <div class="print-btn-circle" onclick="openPrintView()">
         <svg viewBox="0 0 24 24" class="print-icon">
             <path d="M6 9V3h12v6m0 6h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2m0 0v6h12v-6H6z"
                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
+
+        <button class="print-btn" onclick="downloadDoc()">
+            Download
+        </button>
+    </div> -->
+
+
+
+    <div class="print-actions">
+
+        <!-- PRINT -->
+        <div class="print-btn-circle" onclick="openPrintView()">
+            <svg viewBox="0 0 24 24" class="print-icon">
+                <path
+                    d="M6 9V3h12v6m0 6h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2m0 0v6h12v-6H6z"
+                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+            <span class="tooltip">Print</span>
+        </div>
+
+        <!-- DOWNLOAD -->
+        <div class="print-btn-circle" onclick="forceDownload()">
+            <svg viewBox="0 0 24 24" class="print-icon">
+                <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="tooltip">Download</span>
+        </div>
+
+
+
     </div>
+
 
 
     <div class="card">
@@ -612,6 +670,5 @@
 
 
 </body>
-
 
 </html>
